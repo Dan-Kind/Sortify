@@ -19,7 +19,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class SortPanel extends JPanel {
-    private int[] currentArray;
+    private SortableInteger[] currentArray;
     private JButton randomizeButton;
     private JSlider sizeSlider;
     private SortGraphicsPanel graphicsPanel;
@@ -28,7 +28,7 @@ public class SortPanel extends JPanel {
         
         // Initialize the array with a default size
         int defaultSize = 10; // You can set a default size
-        currentArray = new int[defaultSize];
+        currentArray = SortLogic.getInstance().getArray();
         //randomizeArray();
         this.graphicsPanel = new SortGraphicsPanel(currentArray);
        
@@ -38,6 +38,7 @@ public class SortPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //randomizeArray();
+                SortLogic.getInstance().randomizeArray();
                 repaint(); // Redraw the panel after randomization
             }
         });

@@ -25,4 +25,8 @@ public class SortableInteger implements Sortable<SortableInteger>{
     public String toString() {
         return Integer.toString(value);
     }
+
+    int getValue() {
+       return value;
+    }
 }
