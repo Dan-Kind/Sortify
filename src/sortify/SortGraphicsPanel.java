@@ -15,7 +15,7 @@ import java.awt.geom.Rectangle2D;
 
 public class SortGraphicsPanel extends JPanel {
     private SortableInteger[] dataArray;
-
+    private SortableInteger[] initialArray  = SortLogic.getInstance().getArray();
     public SortGraphicsPanel(SortableInteger[] dataArray) {
         this.dataArray = dataArray;
     }
@@ -29,6 +29,8 @@ public class SortGraphicsPanel extends JPanel {
     }
     
 
+
+
     @Override
     protected void paintComponent(Graphics g) {
      super.paintComponent(g);
@@ -40,9 +42,15 @@ public class SortGraphicsPanel extends JPanel {
             int barHeight = (int) (((double) dataArray[i].getValue() / maxValue) * getHeight());
             int x = i * barWidth;
             int y = getHeight() - barHeight;
+            
+            
+
             g2d.setColor(Color.BLUE);
             g2d.fillRect(x, y, barWidth, barHeight);
-
+            
+            // Draw black outline
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(x, y, barWidth, barHeight);
             // Draw the number inside the bar
             Font font = new Font("Arial", Font.PLAIN, 12);
             g2d.setFont(font);
@@ -68,5 +76,7 @@ public class SortGraphicsPanel extends JPanel {
     
     public void setDataArray(SortableInteger[] dataArray) {
         this.dataArray = dataArray;
+        repaint();
+       // SortPanel.repaint();
     }
 }

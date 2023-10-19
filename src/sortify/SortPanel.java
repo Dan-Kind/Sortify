@@ -21,28 +21,36 @@ import javax.swing.event.ChangeListener;
 public class SortPanel extends JPanel {
     private SortableInteger[] currentArray;
     private JButton randomizeButton;
+    private JButton bubbleSortButton;
     private JSlider sizeSlider;
     private SortGraphicsPanel graphicsPanel;
+
     public SortPanel() {
-        
-        
         // Initialize the array with a default size
-        int defaultSize = 10; // You can set a default size
+        int defaultSize = 10;
         currentArray = SortLogic.getInstance().getArray();
-        //randomizeArray();
         this.graphicsPanel = new SortGraphicsPanel(currentArray);
-       
+        
         // Create the "Randomize" button
         randomizeButton = new JButton("Randomize");
         randomizeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //randomizeArray();
                 SortLogic.getInstance().randomizeArray();
+                currentArray = SortLogic.getInstance().getArray();
+                graphicsPanel.setDataArray(currentArray);
                 repaint(); // Redraw the panel after randomization
             }
         });
-
+        
+        // Create the "BubbleSort" button
+        bubbleSortButton = new JButton("BubbleSort");
+        bubbleSortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SortingAlgorithms.bubbleSort(currentArray);
+            }
+        });
         // Create the size slider
         sizeSlider = new JSlider(1, 100); // Set the minimum and maximum size values
         sizeSlider.setValue(defaultSize); // Set the initial value
@@ -50,14 +58,21 @@ public class SortPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int newSize = sizeSlider.getValue();
-                //resizeArray(newSize);
+                SortLogic.getInstance().setSize(newSize);
             }
         });
+
+        // Set layout manager to arrange components vertically
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Add components to the panel
         add(randomizeButton);
         add(new JLabel("Array Size:"));
-        // add(sizeSlider);
+        add(sizeSlider);
+        add(bubbleSortButton);
+        
+        // Add the SortGraphicsPanel to the larger area below existing components
+        add(Box.createRigidArea(new Dimension(0, 20))); // Adds some space between components
         add(graphicsPanel);
     }
 }

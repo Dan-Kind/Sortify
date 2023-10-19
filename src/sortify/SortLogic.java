@@ -23,7 +23,6 @@ public class SortLogic {
             dataArray[i] = new SortableInteger((int) (Math.random() * 100)); // You can adjust the range as needed
         }
         System.out.println("randomized array");
-        SortGraphicsPanel.getInstance().setDataArray(dataArray);
     }
     
      // Singleton instance
@@ -32,11 +31,8 @@ public class SortLogic {
     // Lazy initialization of the singleton instance
     public static synchronized SortLogic getInstance() {
         if (instance == null) {
-            synchronized (SortLogic.class) {
-                if (instance == null) {
-                    instance = new SortLogic();
-                }
-            } }
+            instance = new SortLogic();
+        }
         return instance;
     }
     
@@ -44,4 +40,14 @@ public class SortLogic {
     public SortableInteger[] getArray() {
         return dataArray;
     }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setDataArray(SortableInteger[] dataArray) {
+        this.dataArray = dataArray;
+        SortGraphicsPanel.getInstance().setDataArray(dataArray);
+    }
+    
 }
