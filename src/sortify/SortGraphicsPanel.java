@@ -75,8 +75,8 @@ public class SortGraphicsPanel extends JPanel {
     }
     
     public void setDataArray(SortableInteger[] dataArray) {
-        this.dataArray = dataArray;
-        repaint();
-       // SortPanel.repaint();
+       this.dataArray = dataArray;
+       this.repaint();
+       SortPanel.getInstance().repaint();
     }
 }

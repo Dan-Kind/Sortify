@@ -22,6 +22,9 @@ public class SortPanel extends JPanel {
     private SortableInteger[] currentArray;
     private JButton randomizeButton;
     private JButton bubbleSortButton;
+    private JButton selectionSortButton;
+    private JButton mergeSortButton;
+    private JButton quickSortButton;
     private JSlider sizeSlider;
     private SortGraphicsPanel graphicsPanel;
 
@@ -44,13 +47,40 @@ public class SortPanel extends JPanel {
         });
         
         // Create the "BubbleSort" button
-        bubbleSortButton = new JButton("BubbleSort");
+        bubbleSortButton = new JButton("Bubble Sort");
         bubbleSortButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SortingAlgorithms.bubbleSort(currentArray);
+                SortingAlgorithms.bubbleSortAsync(currentArray);
             }
         });
+        //Create the "Selection Sort" btuoon
+        selectionSortButton = new JButton("Selection Sort");
+        selectionSortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SortingAlgorithms.selectionSortAsync(currentArray);
+            }
+        });
+        
+        //Create the "Merge Sort" button
+        mergeSortButton = new JButton("Merge Sort");
+        mergeSortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SortingAlgorithms.mergeSortAsync(currentArray);
+            }
+        });
+        
+        //Create the "quick Sort" button
+        quickSortButton = new JButton("Quick Sort");
+        quickSortButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SortingAlgorithms.quickSortAsync(currentArray);
+            }
+        });
+        
         // Create the size slider
         sizeSlider = new JSlider(1, 100); // Set the minimum and maximum size values
         sizeSlider.setValue(defaultSize); // Set the initial value
@@ -59,6 +89,7 @@ public class SortPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 int newSize = sizeSlider.getValue();
                 SortLogic.getInstance().setSize(newSize);
+                
             }
         });
 
@@ -70,9 +101,22 @@ public class SortPanel extends JPanel {
         add(new JLabel("Array Size:"));
         add(sizeSlider);
         add(bubbleSortButton);
-        
+        add(selectionSortButton);
+        add(mergeSortButton);
+        add(quickSortButton);
         // Add the SortGraphicsPanel to the larger area below existing components
         add(Box.createRigidArea(new Dimension(0, 20))); // Adds some space between components
         add(graphicsPanel);
+    }
+    
+    private static SortPanel instance;
+    public static SortPanel getInstance() {
+        if (instance == null) {
+            instance = new SortPanel();
+        }
+        return instance;
+    }
+    public static void repaintThis() {
+        instance.repaint();
     }
 }

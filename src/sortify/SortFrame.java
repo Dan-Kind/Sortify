@@ -15,12 +15,12 @@ import javax.swing.JFrame;
 public class SortFrame extends JFrame {
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 620;
- 
+    public SortPanel sortPanel = SortPanel.getInstance();
     public SortFrame() {
         super("Sortify");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Set the frame's size explicitly
-        add(new SortPanel());
+        add(sortPanel);
         setLocationRelativeTo(null);
         setVisible(true);
     }
