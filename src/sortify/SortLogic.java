@@ -20,7 +20,7 @@ public class SortLogic {
     public void randomizeArray() {
         dataArray = new SortableInteger[size];
         for (int i = 0; i < size; i++) {
-            dataArray[i] = new SortableInteger((int) (Math.random() * 100)); // You can adjust the range as needed
+            dataArray[i] = new SortableInteger((int) (Math.random() * 1000)); // You can adjust the range as needed
         }
         System.out.println("randomized array");
     }

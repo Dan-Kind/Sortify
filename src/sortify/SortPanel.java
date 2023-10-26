@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 
 public class SortPanel extends JPanel {
     private SortableInteger[] currentArray;
+    private JPanel algorithmButtonsPanel;
     private JButton randomizeButton;
     private JButton bubbleSortButton;
     private JButton selectionSortButton;
@@ -82,7 +83,7 @@ public class SortPanel extends JPanel {
         });
         
         // Create the size slider
-        sizeSlider = new JSlider(1, 100); // Set the minimum and maximum size values
+        sizeSlider = new JSlider(1, 1000); // Set the minimum and maximum size values
         sizeSlider.setValue(defaultSize); // Set the initial value
         sizeSlider.addChangeListener(new ChangeListener() {
             @Override
@@ -92,18 +93,27 @@ public class SortPanel extends JPanel {
                 
             }
         });
+        // Initialize the algorithm buttons panel and set its layout manager
+        algorithmButtonsPanel = new JPanel();
+        algorithmButtonsPanel.setLayout(new FlowLayout());
+
+        // Add algorithm buttons to the algorithm buttons panel
+        algorithmButtonsPanel.add(bubbleSortButton);
+        algorithmButtonsPanel.add(selectionSortButton);
+        algorithmButtonsPanel.add(mergeSortButton);
+        algorithmButtonsPanel.add(quickSortButton);
+        algorithmButtonsPanel.add(randomizeButton);
+        algorithmButtonsPanel.add(new JLabel("Array Size:"));
+        algorithmButtonsPanel.add(sizeSlider);
+        // Add the algorithm buttons panel to the main SortPanel
 
         // Set layout manager to arrange components vertically
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Add components to the panel
-        add(randomizeButton);
-        add(new JLabel("Array Size:"));
-        add(sizeSlider);
-        add(bubbleSortButton);
-        add(selectionSortButton);
-        add(mergeSortButton);
-        add(quickSortButton);
+       
+        
+        add(algorithmButtonsPanel);
         // Add the SortGraphicsPanel to the larger area below existing components
         add(Box.createRigidArea(new Dimension(0, 20))); // Adds some space between components
         add(graphicsPanel);

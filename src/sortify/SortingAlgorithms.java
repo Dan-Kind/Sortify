@@ -2,7 +2,7 @@ package sortify;
 
 public class SortingAlgorithms {
 
-    private static int delay = 100;
+    private static int delay = 10;
 
     public static void bubbleSortAsync(SortableInteger[] array) {
         new Thread(() -> {
